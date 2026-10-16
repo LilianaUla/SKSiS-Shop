@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://lilianauula.github.io/SKSiS-Shop",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",

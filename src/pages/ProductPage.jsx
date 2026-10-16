@@ -37,6 +37,7 @@ export default function ProductPage() {
   const fav = isFavorite(product.id);
 
   const handleAdd = () => {
+    console.log('Товар перед добавлением:', product);
     add({ id: product.id, title: product.title, price: product.price, image: product.image });
   };
 

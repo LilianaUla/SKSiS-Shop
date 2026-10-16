@@ -10,7 +10,7 @@ export default function ProductGrid() {
     <section className="grid">
       {featured.map((p) => (
         <Link key={p.id} to={`/product/${p.id}`} className="grid__link">
-          <ProductCard id={p.id} title={p.title} price={`${p.price} ₽`} image={p.image} />
+          <ProductCard id={p.id} title={p.title} price={p.price} image={p.image} />
         </Link>
       ))}
     </section>

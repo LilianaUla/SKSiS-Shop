@@ -1,0 +1,13 @@
+.search { margin-top: 24px; max-width: 600px; }
+
+.search__input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+
+.search__input:focus { border-color: var(--color-primary); }

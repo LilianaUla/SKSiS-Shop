@@ -1,0 +1,54 @@
+.fav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+@media (min-width: 800px) { .fav-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+
+.fav { display: flex; flex-direction: column; gap: 8px; }
+
+.fav__link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fav__image {
+  background: var(--color-image);
+  border-radius: 16px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.fav__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.fav__heart {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #e11d48;
+  cursor: pointer;
+}
+
+.fav__title { font-size: 16px; font-weight: 500; margin-top: 4px; }
+.fav__price { font-size: 14px; color: #555; }
+
+.fav__btn {
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 4px;
+}

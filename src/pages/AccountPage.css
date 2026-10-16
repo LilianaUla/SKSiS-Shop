@@ -1,0 +1,93 @@
+.account {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 800px) { .account { grid-template-columns: 220px 1fr; align-items: start; } }
+
+.account__menu {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+@media (min-width: 800px) { .account__menu { flex-direction: column; overflow: visible; padding: 24px 16px; } }
+
+.account__menu-item {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 0;
+  white-space: nowrap;
+}
+
+.account__menu-item--active {
+  color: #111;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.account__content { display: flex; flex-direction: column; gap: 32px; }
+.account__head { display: flex; align-items: center; gap: 20px; }
+
+.account__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-image);
+  flex-shrink: 0;
+}
+
+.account__name { font-size: 20px; font-weight: 500; }
+.account__email { color: var(--color-muted); font-size: 14px; }
+
+.account__card {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.account__card-title { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+
+.account__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.account__input {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  background: #f9fafb;
+}
+
+.account__empty {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.account__text { color: var(--color-muted); font-size: 15px; }
+.account__link { color: var(--color-primary); text-decoration: none; font-size: 15px; }

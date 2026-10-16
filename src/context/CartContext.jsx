@@ -7,7 +7,16 @@ export function CartProvider({ children }) {
   const [items, setItems] = useState(() => {
     try {
       const saved = localStorage.getItem(CART_KEY);
-      return saved ? JSON.parse(saved) : [];
+      if (!saved) return [];
+      
+      const parsed = JSON.parse(saved);
+      
+      // ✅ ЗАЩИТА: Принудительно делаем цену и количество числами при загрузке из localStorage
+      return parsed.map(item => ({
+        ...item,
+        price: Number(item.price) || 0,
+        qty: Number(item.qty) || 1
+      }));
     } catch {
       return [];
     }
@@ -18,14 +27,18 @@ export function CartProvider({ children }) {
   }, [items]);
 
   const add = async (product, qty = 1, size = 's') => {
+    // ✅ ЗАЩИТА: Преобразуем цену и количество в числа перед добавлением
+    const safePrice = Number(product.price) || 0;
+    const safeQty = Number(qty) || 1;
+
     setItems((prev) => {
       const existing = prev.find((i) => i.id === product.id && i.size === size);
       if (existing) {
         return prev.map((i) =>
-          i.id === product.id && i.size === size ? { ...i, qty: i.qty + qty } : i
+          i.id === product.id && i.size === size ? { ...i, qty: i.qty + safeQty } : i
         );
       }
-      return [...prev, { ...product, qty, size }];
+      return [...prev, { ...product, price: safePrice, qty: safeQty, size }];
     });
   };
 
@@ -34,16 +47,27 @@ export function CartProvider({ children }) {
   };
 
   const changeQty = async (id, size, qty) => {
-    if (qty < 1) return;
+    const safeQty = Number(qty);
+    if (safeQty < 1) return;
     setItems((prev) =>
-      prev.map((i) => (i.id === id && i.size === size ? { ...i, qty } : i))
+      prev.map((i) => (i.id === id && i.size === size ? { ...i, qty: safeQty } : i))
     );
   };
 
   const clear = async () => setItems([]);
 
-  const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const count = items.reduce((sum, i) => sum + i.qty, 0);
+  // ✅ ИСПРАВЛЕНИЕ: Считаем сумму, явно преобразуя значения в числа
+  const total = items.reduce((sum, i) => {
+    const price = Number(i.price) || 0;
+    const qty = Number(i.qty) || 0;
+    return sum + price * qty;
+  }, 0);
+
+  // ✅ ИСПРАВЛЕНИЕ: Считаем количество товаров
+  const count = items.reduce((sum, i) => {
+    const qty = Number(i.qty) || 0;
+    return sum + qty;
+  }, 0);
 
   return (
     <CartContext.Provider value={{ items, add, remove, changeQty, clear, total, count, loading: false }}>
